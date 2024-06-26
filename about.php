@@ -43,6 +43,32 @@
         <h1>About Us</h1>
     </div>
 
+    <?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "book_db";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT stars, review_text, name, role, image_path FROM reviews";
+    $result = $conn->query($sql);
+
+    $reviews = [];
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $reviews[] = $row;
+        }
+    }
+    $conn->close();
+    ?>
+
 
 
 
@@ -81,130 +107,25 @@
     <!-- about section ends -->
 
 
+    
     <!-- reviews section starts  -->
-     <section class="reviews">
+    <section class="reviews">
         <div class="swiper reviews-slider">
             <div class="swiper-wrapper">
+                <?php foreach ($reviews as $review): ?>
+                    <div class="swiper-slide slide">
+                        <div class="stars">
+                            <?php for ($i = 0; $i < $review['stars']; $i++): ?>
+                            <i class="fas fa-star"></i>
+                            <?php endfor; ?>
+                        </div>
+                        <p><?php echo htmlspecialchars($review['review_text']); ?></p>
+                        <h3><?php echo htmlspecialchars($review['name']); ?></h3>
+                        <span><?php echo htmlspecialchars($review['role']); ?></span>
+                        <img src="<?php echo htmlspecialchars($review['image_path']); ?>" alt="">
+                    </div>
+                <?php endforeach; ?>
                 
-                <div class="swiper-slide slide">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. In, ipsam placeat recusandae unde quidem totam explicabo quia odit? Minus dolorem rem molestias eaque temporibus neque beatae numquam consequuntur! Ipsum consequuntur, officia nobis incidunt porro architecto!</p>
-                    <h3>john Mc.</h3>
-                    <span>traveller</span>
-                    <img src="images/pic-1.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide slide">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. In, ipsam placeat recusandae unde quidem totam explicabo quia odit? Minus dolorem rem molestias eaque temporibus neque beatae numquam conofficia nobis incidunt porro architecto!</p>
-                    <h3>john Mc.</h3>
-                    <span>traveller</span>
-                    <img src="images/pic-1.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide slide">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. In, ipsam placeat recusandae unde quidem totam explibis incidunt porro architecto!</p>
-                    <h3>john Mc.</h3>
-                    <span>traveller</span>
-                    <img src="images/pic-1.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide slide">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. In, ipsam placeat recusandae unde quidem totam expum consequuntur, officia nobis incidunt porro architecto!</p>
-                    <h3>john Mc.</h3>
-                    <span>traveller</span>
-                    <img src="images/pic-1.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide slide">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. In, ipsam placeat recusandae unde quidem totam explicabo quia odit? Minus dolorem rem molestias eaque tecto!</p>
-                    <h3>john Mc.</h3>
-                    <span>traveller</span>
-                    <img src="images/pic-1.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide slide">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. In, ipsam placeat recusandae unde quidem totam explicabo quia odit? Minus dolorem rem mole consequuntur, officia nobis incidunt porro architecto!</p>
-                    <h3>john Mc.</h3>
-                    <span>traveller</span>
-                    <img src="images/pic-1.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide slide">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. In, iue beatae numquam consequuntur! Ipsum consequuntur, officia nobis incidunt porro architecto!</p>
-                    <h3>john Mc.</h3>
-                    <span>traveller</span>
-                    <img src="images/pic-1.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide slide">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. In, ipsam placeat recusandae unde quidem totam explicabo quia odit? Minus dolorem rem molestias eaque temporibus neque beatae numquam consequuntur! Ipsum consequuntur, officia nobis incidunt porro architecto!</p>
-                    <h3>john Mc.</h3>
-                    <span>traveller</span>
-                    <img src="images/pic-1.jpg" alt="">
-                </div>
-                <div class="swiper-slide slide">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. In, ipsam placeat recusandae unde quidem totam explicabibus neque beatae numquam consequuntur! </p>
-                    <h3>john Mc.</h3>
-                    <span>traveller</span>
-                    <img src="images/pic-1.jpg" alt="">
-                </div> 
-
             </div>
         </div>
      </section>
